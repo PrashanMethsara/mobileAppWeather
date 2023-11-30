@@ -47,7 +47,7 @@ export default function HomeScreen() {
 
   const fetchMyWeatherData = async ()=>{
     let myCity = await getData('city');
-    let cityName = 'Islamabad';
+    let cityName = 'singapore';
     if(myCity){
       cityName = myCity;
     }
@@ -140,19 +140,23 @@ export default function HomeScreen() {
                   {location?.name}, 
                   <Text className="text-lg font-semibold text-gray-300">{location?.country}</Text>
                 </Text>
-                {/* weather icon */}
+                <Text className="text-white font-semibold text-base">
+                      { weather?.forecast?.forecastday[0]?.astro?.sunrise }
+                    </Text>
+                
                 <View className="flex-row justify-center">
                   <Image 
                     // source={{uri: 'https:'+current?.condition?.icon}} 
                     source={weatherImages[current?.condition?.text || 'other']} 
                     className="w-52 h-52" />
+                      <Text className="text-center font-bold text-white text-6xl ml-5">
+                      {current?.temp_c}&#176;
+                    </Text>
                   
                 </View>
                 {/* degree celcius */}
                 <View className="space-y-2">
-                    <Text className="text-center font-bold text-white text-6xl ml-5">
-                      {current?.temp_c}&#176;
-                    </Text>
+                  
                     <Text className="text-center text-white text-xl tracking-widest">
                       {current?.condition?.text}
                     </Text>
@@ -160,21 +164,21 @@ export default function HomeScreen() {
 
                 {/* other stats */}
                 <View className="flex-row justify-between mx-4">
+                  
                   <View className="flex-row space-x-2 items-center">
-                    <Image source={require('../assets/icons/wind.png')} className="w-6 h-6" />
-                    <Text className="text-white font-semibold text-base">{current?.wind_kph}km</Text>
+                    <Image source={require('../assets/icons/sun.png')} className="w-6 h-6" />
+                    <Text className="text-white font-semibold text-base">
+                      { current?.temp_c }
+                    </Text>
                   </View>
                   <View className="flex-row space-x-2 items-center">
                     <Image source={require('../assets/icons/drop.png')} className="w-6 h-6" />
                     <Text className="text-white font-semibold text-base">{current?.humidity}%</Text>
                   </View>
                   <View className="flex-row space-x-2 items-center">
-                    <Image source={require('../assets/icons/sun.png')} className="w-6 h-6" />
-                    <Text className="text-white font-semibold text-base">
-                      { weather?.forecast?.forecastday[0]?.astro?.sunrise }
-                    </Text>
-                  </View>
-                  
+                    <Image source={require('../assets/icons/wind.png')} className="w-6 h-6" />
+                    <Text className="text-white font-semibold text-base">{current?.wind_kph}km</Text>
+                  </View> 
                 </View>
               </View>
 
